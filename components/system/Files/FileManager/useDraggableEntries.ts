@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef } from "react";
 import { type FocusEntryFunctions } from "components/system/Files/FileManager/useFocusableEntries";
 import { useSession } from "contexts/session";
 import {
+  getSiteUrl,
   getHtmlToImage,
   getMimeType,
   haltEvent,
@@ -172,9 +173,7 @@ const useDraggableEntries = (
         if (singleFile) {
           event.nativeEvent.dataTransfer?.setData(
             "DownloadURL",
-            `${getMimeType(file) || "application/octet-stream"}:${file}:${
-              window.location.origin
-            }${encodeURI(join(entryUrl, file))}`
+            `${getMimeType(file) || "application/octet-stream"}:${file}:${getSiteUrl()}${encodeURI(join(entryUrl, file))}`
           );
         }
 

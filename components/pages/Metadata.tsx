@@ -13,10 +13,12 @@ import {
 import {
   getDpi,
   getExtension,
+  getSiteUrl,
   getMimeType,
   imageSrc,
   imageSrcs,
   isDynamicIcon,
+  prependBasePath,
 } from "utils/functions";
 
 const { alias, author, description } = PACKAGE_DATA;
@@ -44,7 +46,7 @@ const Metadata: FC = () => {
     () =>
       isDynamicIcon(favIcon)
         ? imageSrc(favIcon, 16, getDpi(), getExtension(favIcon)).split(" ")[0]
-        : favIcon,
+        : prependBasePath(favIcon),
     [favIcon]
   );
   const favIconMimeType = useMemo(
@@ -121,7 +123,7 @@ const Metadata: FC = () => {
 
   useEffect(() => {
     if (!siteUrl && window.location.origin) {
-      setSiteUrl(window.location.origin);
+      setSiteUrl(getSiteUrl());
     }
   }, [siteUrl]);
 

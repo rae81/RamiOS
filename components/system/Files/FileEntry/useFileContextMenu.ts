@@ -47,6 +47,7 @@ import {
 } from "utils/ffmpeg/formats";
 import {
   getExtension,
+  getSiteUrl,
   isSafari,
   isYouTubeUrl,
   saveUnpositionedDesktopIcons,
@@ -446,7 +447,7 @@ const useFileContextMenu = (
                 const shareData: ShareData = {
                   text: `${baseFileName} - ${alias}`,
                   title: baseFileName,
-                  url: `${window.location.origin}?url=${url}`,
+                  url: `${getSiteUrl()}?url=${url}`,
                 };
 
                 try {

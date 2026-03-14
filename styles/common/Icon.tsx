@@ -9,6 +9,7 @@ import {
   imageSrc,
   imageSrcs,
   isDynamicIcon,
+  prependBasePath,
   supportsWebp,
 } from "utils/functions";
 
@@ -149,7 +150,9 @@ const Icon: FCWithRef<
         onError={onError}
         onLoad={onLoad}
         src={
-          isDynamic ? imageSrc(imgSrc, imgSize, 1, srcExt) : src || undefined
+          isDynamic
+            ? imageSrc(imgSrc, imgSize, 1, srcExt)
+            : prependBasePath(src) || undefined
         }
         srcSet={
           !singleSrc && isDynamic

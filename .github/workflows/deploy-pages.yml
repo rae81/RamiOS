@@ -24,6 +24,8 @@ jobs:
           cache: npm
           node-version: 22
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - name: Install Dependencies
         run: npm ci
       - name: Build Static Export

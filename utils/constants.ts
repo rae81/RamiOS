@@ -310,9 +310,11 @@ export const ICON_CACHE_EXTENSION = ".cache";
 
 export const SESSION_FILE = "/session.json";
 
+export const PAGE_BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export const SHORTCUT_ICON = `${ICON_PATH}/shortcut.webp`;
 
-export const FAVICON_BASE_PATH = "/favicon.ico";
+export const FAVICON_BASE_PATH = `${PAGE_BASE_PATH}/favicon.ico`;
 
 export const FOLDER_ICON = `${ICON_PATH}/folder.webp`;
 
@@ -374,7 +376,7 @@ export const PACKAGE_DATA = {
     email: "rae81@mail.aub.edu",
     name: "Rami Eid",
     npub: "",
-    url: "https://rae81.github.io",
+    url: "https://rae81.github.io/RamiOS",
   },
   description:
     "Interactive browser desktop for Rami Eid's CV and accomplishments.",

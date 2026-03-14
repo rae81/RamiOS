@@ -12,7 +12,7 @@ import {
   DISBALE_AUTO_INPUT_FEATURES,
   HIGH_PRIORITY_REQUEST,
 } from "utils/constants";
-import { getExtension, loadFiles } from "utils/functions";
+import { getExtension, loadFiles, prependBasePath } from "utils/functions";
 
 export const FILE_INDEX = "/.index/search.lunr.json";
 
@@ -43,7 +43,10 @@ const search = async (
 ): Promise<Index.Result[]> => {
   if (!window.lunr) await loadFiles([SEARCH_LIB]);
   if (!index && !baseIndex?.search) {
-    const response = await fetch(FILE_INDEX, HIGH_PRIORITY_REQUEST);
+    const response = await fetch(
+      prependBasePath(FILE_INDEX),
+      HIGH_PRIORITY_REQUEST
+    );
 
     try {
       const { paths, ...responseIndex } = JSON.parse(

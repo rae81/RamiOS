@@ -45,6 +45,7 @@ import {
   getUrlOrSearch,
   haltEvent,
   label,
+  prependBasePath,
 } from "utils/functions";
 import {
   getInfoWithExtension,
@@ -136,7 +137,7 @@ const Browser: FC<ComponentProcessProps> = ({ id }) => {
 
         if (addressInput.toLowerCase().startsWith(DINO_GAME.url)) {
           changeIframeWindowLocation(
-            `${window.location.origin}${DINO_GAME.path}`,
+            `${window.location.origin}${prependBasePath(DINO_GAME.path)}`,
             contentWindow
           );
           prependFileToTitle(`${DINO_GAME.url}/`);

@@ -51,6 +51,7 @@ import {
   getGifJs,
   getHtmlToImage,
   getMimeType,
+  getSiteUrl,
   getTZOffsetISOString,
   isSafari,
   isYouTubeUrl,
@@ -202,7 +203,7 @@ export const makeExternalShortcut = (contents: Buffer): Buffer => {
   return Buffer.from(
     createShortcut({
       URL: encodeURI(
-        `${window.location.origin}${pid ? `/?app=${pid}` : ""}${
+        `${getSiteUrl()}${pid ? `/?app=${pid}` : ""}${
           url ? `${pid ? "&" : "/?"}url=${url}` : ""
         }`
       ),

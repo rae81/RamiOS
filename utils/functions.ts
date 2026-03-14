@@ -20,6 +20,7 @@ import {
   MAX_RES_ICON_OVERRIDE,
   MILLISECONDS_IN_SECOND,
   ONE_TIME_PASSIVE_EVENT,
+  PAGE_BASE_PATH,
   PACKAGE_DATA,
   PREVENT_SCROLL,
   SHORTCUT_EXTENSION,
@@ -86,6 +87,32 @@ export const getExtension = (url: string): string => {
   return ext.toLowerCase();
 };
 
+export const prependBasePath = (url = ""): string => {
+  if (
+    !url ||
+    !PAGE_BASE_PATH ||
+    url.startsWith("blob:") ||
+    url.startsWith("data:") ||
+    /^[a-z][a-z\d+.-]*:/i.test(url)
+  ) {
+    return url;
+  }
+
+  const normalizedUrl = url.startsWith("/") ? url : `/${url}`;
+
+  if (
+    normalizedUrl === PAGE_BASE_PATH ||
+    normalizedUrl.startsWith(`${PAGE_BASE_PATH}/`)
+  ) {
+    return normalizedUrl;
+  }
+
+  return `${PAGE_BASE_PATH}${normalizedUrl}`;
+};
+
+export const getSiteUrl = (): string =>
+  `${window.location.origin}${PAGE_BASE_PATH}`;
+
 export const sendMouseClick = (target: HTMLElement, count = 1): void => {
   if (count === 0) return;
 
@@ -139,13 +166,15 @@ export const imageSrc = (
     expectedSize === size ? Math.min(maxIconSize, ratioSize) : ratioSize
   );
 
-  return `${join(
-    dirname(imagePath),
-    `${ICON_RES_MAP[imageSize] || imageSize}x${
-      ICON_RES_MAP[imageSize] || imageSize
-    }`,
-    `${imageName}${extension}`
-  ).replace(/\\/g, "/")}${ratio > 1 ? ` ${ratio}x` : ""}`;
+  return `${prependBasePath(
+    join(
+      dirname(imagePath),
+      `${ICON_RES_MAP[imageSize] || imageSize}x${
+        ICON_RES_MAP[imageSize] || imageSize
+      }`,
+      `${imageName}${extension}`
+    ).replace(/\\/g, "/")
+  )}${ratio > 1 ? ` ${ratio}x` : ""}`;
 };
 
 export const imageSrcs = (
@@ -314,7 +343,7 @@ const loadScript = (
     if (defer) script.defer = true;
     if (asModule) script.type = "module";
     script.fetchPriority = "high";
-    script.src = src;
+    script.src = prependBasePath(src);
     script.addEventListener("error", reject, ONE_TIME_PASSIVE_EVENT);
     script.addEventListener("load", resolve, ONE_TIME_PASSIVE_EVENT);
 
@@ -339,7 +368,7 @@ const loadStyle = (
 
     link.rel = "stylesheet";
     link.fetchPriority = "high";
-    link.href = href;
+    link.href = prependBasePath(href);
     link.addEventListener("error", reject, ONE_TIME_PASSIVE_EVENT);
     link.addEventListener("load", resolve, ONE_TIME_PASSIVE_EVENT);
 
@@ -1084,7 +1113,7 @@ export const preloadImage = (
       link.href = href;
     }
   } else {
-    link.href = image;
+    link.href = prependBasePath(image);
   }
 
   const preloadedLinks = getPreloadedLinks();
@@ -1118,7 +1147,7 @@ export const preloadLibs = (libs: string[] = []): void => {
 
     link.fetchPriority = "high";
     link.rel = "preload";
-    link.href = lib;
+    link.href = prependBasePath(lib);
 
     switch (getExtension(lib)) {
       case ".css":

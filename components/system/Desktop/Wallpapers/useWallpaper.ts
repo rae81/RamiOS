@@ -40,6 +40,7 @@ import {
   isBeforeBg,
   parseBgPosition,
   preloadImage,
+  prependBasePath,
 } from "utils/functions";
 
 let slideshowFiles: Record<string, string[]> = {};
@@ -314,7 +315,7 @@ const useWallpaper = (
 
           preloadImage(
             nextWallpaper.startsWith("/")
-              ? `${window.location.origin}${nextWallpaper}`
+              ? `${window.location.origin}${prependBasePath(nextWallpaper)}`
               : nextWallpaper,
             PRELOAD_ID,
             "auto"
@@ -322,7 +323,7 @@ const useWallpaper = (
         }
 
         if (wallpaperUrl.startsWith("/")) {
-          wallpaperUrl = `${window.location.origin}${wallpaperUrl}`;
+          wallpaperUrl = `${window.location.origin}${prependBasePath(wallpaperUrl)}`;
         }
       } while (
         currentWallpaperUrl === wallpaperUrl &&
