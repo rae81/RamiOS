@@ -1,0 +1,6 @@
+[InternetShortcut]
+BaseURL=FileExplorer
+Comment=Opens Rami Eid's home folder.
+IconFile=/System/Icons/user.webp
+Type=System
+URL=/Users/Public

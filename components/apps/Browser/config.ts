@@ -25,11 +25,15 @@ export const bookmarks: Bookmark[] = [
     url: "/Users/Public/Desktop/Rami%20Eid%20CV.pdf",
   },
   {
-    icon: "/System/Icons/Favicons/dir.webp",
-    name: "Index of /",
-    url: "http://localhost/",
+    icon: "/System/Icons/pdf.webp",
+    name: "Rami Eid Transcript",
+    url: "/Users/Public/Desktop/Rami%20Eid%20Transcript.pdf",
   },
-  DINO_GAME,
+  {
+    icon: "/System/Icons/Favicons/dir.webp",
+    name: "Portfolio Desktop",
+    url: "/Users/Public/Desktop",
+  },
   {
     icon: "/System/Icons/Favicons/google.webp",
     name: "Google",
@@ -44,16 +48,6 @@ export const bookmarks: Bookmark[] = [
     icon: "/System/Icons/Favicons/archive.webp",
     name: "Internet Archive",
     url: "https://archive.org/",
-  },
-  {
-    icon: "/System/Icons/webamp.webp",
-    name: "Winamp Skin Museum",
-    url: "https://skins.webamp.org/",
-  },
-  {
-    icon: "/System/Icons/Favicons/aos.webp",
-    name: "AaronOS",
-    url: "https://aaronos.dev/",
   },
 ];
 

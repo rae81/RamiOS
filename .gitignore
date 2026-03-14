@@ -18,6 +18,8 @@ public/Users/Public/**
 
 !public/Users/**/desktop.ini
 !public/Users/Public/Desktop
+!public/Users/Public/Desktop/*.pdf
+!public/Users/Public/Desktop/*.url
 !public/Users/Public/Desktop/My PC.url
 !public/Users/Public/Desktop/Public.url
 !public/Users/Public/Documents
