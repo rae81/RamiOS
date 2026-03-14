@@ -27,7 +27,7 @@ jobs:
         with:
           enablement: true
       - name: Install Dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
       - name: Build Static Export
         run: npm run build
       - name: Ensure GitHub Pages skips Jekyll
